@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-label="JARIMA MAYDONCHASI — avtomatlashtirilgan jarima maydonchasi tizimi">
+  <defs>
+    <linearGradient id="fon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#111c33"/>
+    </linearGradient>
+    <linearGradient id="nur" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#34d399" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="tor" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <style>
+      .sarlavha{font:800 54px 'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;fill:#f8fafc;letter-spacing:1px}
+      .izoh{font:500 22px 'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;fill:#94a3b8}
+      .teg{font:600 15px 'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;fill:#cbd5e1}
+    </style>
+  </defs>
+  <rect width="1280" height="360" fill="url(#fon)"/>
+  <rect width="1280" height="360" fill="url(#tor)" opacity=".55"/>
+
+  <g transform="translate(64 0)">
+    <rect x="0" y="70" width="56" height="56" rx="14" fill="#34d399"/>
+    <text x="28" y="107" text-anchor="middle" style="font:800 22px 'Segoe UI',Inter,sans-serif;fill:#052e1c">JM</text>
+    <text class="sarlavha" x="0" y="190">JARIMA MAYDONCHASI</text>
+    <text class="izoh" x="0" y="232">ANPR kamera · shlagbaum · EPOS chek · soatlik tarif (VMQ 149)</text>
+    <g transform="translate(0 270)">
+      <rect width="62" height="30" rx="15" fill="#1e293b"/><text class="teg" x="31" y="20" text-anchor="middle">Go</text>
+      <rect x="72" width="86" height="30" rx="15" fill="#1e293b"/><text class="teg" x="115" y="20" text-anchor="middle">SQLite</text>
+      <rect x="168" width="112" height="30" rx="15" fill="#1e293b"/><text class="teg" x="224" y="20" text-anchor="middle">WebView2</text>
+      <rect x="290" width="96" height="30" rx="15" fill="#1e293b"/><text class="teg" x="338" y="20" text-anchor="middle">Android</text>
+      <rect x="396" width="104" height="30" rx="15" fill="#1e293b"/><text class="teg" x="448" y="20" text-anchor="middle">Ed25519</text>
+    </g>
+  </g>
+
+  <!-- Darvoza: raqam skaneri va shlagbaum (SMIL — GitHub <img> ichida ham ishlaydi) -->
+  <g>
+    <rect x="800" y="96" width="360" height="96" rx="10" fill="#f8fafc" stroke="#0f172a" stroke-width="4"/>
+    <line x1="892" y1="100" x2="892" y2="188" stroke="#0f172a" stroke-width="4"/>
+    <text x="846" y="158" text-anchor="middle" style="font:700 40px 'DejaVu Sans Mono',Consolas,monospace;fill:#0f172a">75</text>
+    <text x="1026" y="158" text-anchor="middle" style="font:700 40px 'DejaVu Sans Mono',Consolas,monospace;fill:#0f172a;letter-spacing:2px">A 123 BC</text>
+    <rect x="800" y="104" width="360" height="6" fill="url(#nur)" opacity="0">
+      <animate attributeName="y" values="104;104;180;180" keyTimes="0;0.05;0.4;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.05;0.4;0.46;1" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    <text x="980" y="236" text-anchor="middle" opacity="0" style="font:800 26px 'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif;fill:#34d399">Yo'l ochiq
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.58;0.88;1" dur="6s" repeatCount="indefinite"/>
+    </text>
+    <rect x="1200" y="262" width="28" height="44" rx="6" fill="#334155"/>
+    <circle cx="1214" cy="252" r="7" fill="#ef4444">
+      <animate attributeName="fill" values="#ef4444;#ef4444;#22c55e;#22c55e;#ef4444" keyTimes="0;0.48;0.56;0.88;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="0 1214 268;0 1214 268;80 1214 268;80 1214 268;0 1214 268" keyTimes="0;0.48;0.6;0.88;1" dur="6s" repeatCount="indefinite"/>
+      <rect x="1018" y="262" width="196" height="12" rx="6" fill="#f59e0b"/>
+      <rect x="1050" y="262" width="22" height="12" fill="#ef4444"/>
+      <rect x="1098" y="262" width="22" height="12" fill="#ef4444"/>
+      <rect x="1146" y="262" width="22" height="12" fill="#ef4444"/>
+    </g>
+    <line x1="900" y1="306" x2="1240" y2="306" stroke="#334155" stroke-width="3" stroke-dasharray="14 10"/>
+  </g>
+</svg>
