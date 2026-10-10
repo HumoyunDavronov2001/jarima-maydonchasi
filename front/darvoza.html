@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Darvoza</title>
+<style>
+@font-face{font-family:"Public Sans";src:url(fonts/PublicSans-Regular.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"Public Sans";src:url(fonts/PublicSans-SemiBold.woff2) format("woff2");font-weight:600}
+@font-face{font-family:"Public Sans";src:url(fonts/PublicSans-Bold.woff2) format("woff2");font-weight:700}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:28px/1.35 "Public Sans",system-ui,sans-serif;background:#0E1218;color:#fff;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 40px;color:#8A94A6;font-size:22px}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 60px 80px;gap:26px}
+.plate{display:inline-flex;align-items:stretch;background:#fff;border:5px solid #111;border-radius:8px;color:#111;font-weight:700;font-size:72px;line-height:1;height:110px;animation:pop .5s cubic-bezier(.34,1.3,.5,1)}
+.plate b{display:flex;align-items:center;padding:0 .4em;border-right:5px solid #111}
+.plate i{display:flex;align-items:center;padding:0 .5em;font-style:normal;letter-spacing:.08em}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+h1{margin:0;font-size:64px;font-weight:700;line-height:1.1;animation:up .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+h1.ok{color:#3DDC84}h1.no{color:#FF6B5E}h1.wait{color:#FFC86B}h1.mute{color:#8A94A6;font-weight:600;font-size:44px}
+p{margin:0;color:#C9D1DE;max-width:26ch}
+.arm{width:260px;height:120px}
+.arm .bar{transform-origin:24px 96px;transition:transform 1s cubic-bezier(.34,1.3,.5,1)}
+.arm.open .bar{transform:rotate(-72deg)}
+.prog{position:fixed;left:0;right:0;bottom:0;height:14px;background:#1B2230}
+.prog i{display:block;height:100%;background:#3DDC84;width:0;transition:width linear}
+footer{padding:0 40px 26px;color:#5C6779;font-size:18px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header><span id="org">Jarima maydonchasi</span><span id="clock"></span></header>
+<main id="m"></main>
+<div class="prog"><i id="prog"></i></div>
+<footer><span id="hint">Sinov: 1 bo'sh, 2 tekshiruv, 3 yo'l ochiq, 4 rasmiylashtirilmagan, 5 ro'yxatda yo'q, 6 blok, 7 operator, 8 xayr</span><span>Qabul va berish — kechayu kunduz</span></footer>
+<script>
+const q=new URLSearchParams(location.search);
+const pad=n=>String(n).padStart(2,'0');
+function plate(p){if(!p)return'';p=p.replace(/\s/g,'').toUpperCase();const reg=p.slice(0,2),rest=p.slice(2);const uz=/^\d{2}$/.test(reg)&&(/^[A-Z]\d{3}[A-Z]{2}$/.test(rest)||/^\d{3}[A-Z]{3}$/.test(rest)||/^[A-Z]\d{4}$/.test(rest));const mid=/^[A-Z]\d{3}[A-Z]{2}$/.test(rest)?`${rest[0]} ${rest.slice(1,4)} ${rest.slice(4)}`:/^\d{3}[A-Z]{3}$/.test(rest)?`${rest.slice(0,3)} ${rest.slice(3)}`:rest;return uz?`<span class="plate"><b>${reg}</b><i>${mid}</i></span>`:`<span class="plate"><i>${p}</i></span>`}
+const arm=open=>`<svg class="arm ${open?'open':''}" viewBox="0 0 260 120"><rect x="8" y="84" width="34" height="34" rx="6" fill="#4A5568"/><circle cx="25" cy="98" r="5" fill="#fff"/><g class="bar"><rect x="24" y="92" width="216" height="12" rx="6" fill="#F2C94C"/><rect x="24" y="92" width="216" height="12" rx="6" fill="url(#s)"/></g><defs><pattern id="s" width="30" height="12" patternUnits="userSpaceOnUse"><rect width="15" height="12" fill="#E04B3F"/></pattern></defs></svg>`;
+const T={
+  idle:()=>`<h1 class="mute">Chiqish uchun mashinani<br>kamera oldiga qo'ying</h1>${arm(false)}`,
+  reading:p=>`${plate(p)}<h1 class="wait">Tekshirilmoqda</h1>${arm(false)}`,
+  open:p=>`${plate(p)}<h1 class="ok">Yo'l ochiq</h1><p>Shlagbaum ochilmoqda. Xayr.</p>${arm(true)}`,
+  bye:p=>`${plate(p)}<h1 class="ok">Yo'l ochiq</h1><p>Xayr.</p>${arm(true)}`,
+  not_ready:p=>`${plate(p)}<h1 class="no">Chiqarish rasmiylashtirilmagan</h1><p>Operatorga murojaat qiling: to'lov, ruxsatnoma yoki oluvchi hujjati.</p>${arm(false)}`,
+  unknown:p=>`${plate(p)}<h1 class="no">Bu mashina ro'yxatda yo'q</h1><p>Shlagbaum ochilmaydi. Operatorga murojaat qiling.</p>${arm(false)}`,
+  blocked:p=>`${plate(p)}<h1 class="no">Chiqarish to'xtatilgan</h1><p>Operatorga murojaat qiling.</p>${arm(false)}`,
+  operator:p=>`${plate(p)}<h1 class="wait">Operator tekshirmoqda</h1><p>Raqam aniqlashtirilmoqda, kuting.</p>${arm(false)}`,
+};
+let t;
+function show(s,p,secs){document.getElementById('m').innerHTML=(T[s]||T.idle)(p);const b=document.getElementById('prog');b.style.transition='none';b.style.width='0';clearTimeout(t);if(secs){requestAnimationFrame(()=>{b.style.transition=`width ${secs}s linear`;b.style.width='100%'});t=setTimeout(()=>show('idle'),secs*1000)}}
+show(q.get('s')||'idle',q.get('p')||'',['open','bye'].includes(q.get('s'))?8:0);
+setInterval(()=>{const d=new Date();document.getElementById('clock').textContent=`${pad(d.getHours())}:${pad(d.getMinutes())}`},1000);
+document.addEventListener('keydown',e=>{const m={1:'idle',2:'reading',3:'open',4:'not_ready',5:'unknown',6:'blocked',7:'operator',8:'bye'}[e.key];if(m)show(m,'01A123BC',['open','bye'].includes(m)?8:0)});
+if(window.opener&&window.opener.JM){const J=window.opener.JM;document.getElementById('org').textContent=J.settings.org.name;J.bus.on('gate',g=>show(g.state,g.plate,['open','bye'].includes(g.state)?8:0));J.bus.on('lane',l=>{if(l.dir==='out'&&l.kind==='car')show('reading',l.plate)});document.getElementById('hint').textContent='Terminalga ulangan';}
+else if(location.protocol!=='file:'){/* terminal serveriga ulanadi; uzilsa qayta urinadi */
+let kutish=500;(function ulan(){const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws/gate');
+ws.onopen=()=>{kutish=500;document.getElementById('hint').textContent='Terminalga ulangan';};
+ws.onmessage=e=>{let d;try{d=JSON.parse(e.data)}catch(x){return}show(d.state,d.plate,['open','bye'].includes(d.state)?8:0)};
+ws.onclose=()=>{document.getElementById('hint').textContent="Aloqa yo'q — qayta ulanmoqda";setTimeout(ulan,kutish);kutish=Math.min(kutish*2,10000)};
+ws.onerror=()=>{try{ws.close()}catch(x){}}})();
+fetch('/api/op/settings',{method:'POST',body:'[]'}).then(r=>r.json()).then(s=>{if(s&&s.org)document.getElementById('org').textContent=s.org.name}).catch(()=>{});}
+</script>
+</body>
+</html>

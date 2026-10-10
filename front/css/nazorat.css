@@ -1,0 +1,42 @@
+/* nazorat — app.css ustiga qo'shimchalar */
+.login{position:fixed;inset:0;background:var(--rail);color:#fff;display:flex;align-items:center;justify-content:center}
+.login .box{width:520px;max-width:calc(100vw - 32px)}
+.login .logo{width:52px;height:52px;border-radius:14px;background:#fff;color:var(--rail);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.login h1{font-size:26px;margin-bottom:6px}
+.login p{color:#8E9AB3;margin-bottom:22px}
+.login .oneid{width:100%;height:50px;border-radius:10px;background:#fff;color:var(--rail);font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px}
+.login .roles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.login .roles button{padding:12px 14px;border-radius:10px;background:#1A2236;color:#fff;text-align:left;border:1px solid #2A3550;font-size:13.5px;line-height:1.35}
+.login .roles button:hover{background:#22304C}
+.login .roles button b{display:block;font-weight:600}
+.login .roles button small{color:#8E9AB3}
+.login .note{margin-top:18px;font-size:12.5px;color:#5C6779}
+.scope{display:flex;align-items:center;gap:8px;font-size:13.5px}
+.scope select{height:34px;padding:0 10px;border:1px solid var(--hair-2);border-radius:var(--r-s);background:#fff}
+.ro{font-size:11.5px;font-weight:700;color:var(--amber);background:var(--amber-bg);padding:3px 8px;border-radius:5px;letter-spacing:.02em}
+.chart{display:flex;align-items:flex-end;gap:5px;height:130px;padding:6px 0 0}
+.chart div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;height:100%}
+.chart i{display:block;background:var(--hair-2);border-radius:2px 2px 0 0;transition:height .6s var(--ease)}
+.chart i.b{background:var(--ink-2)}
+.chart span{font-size:10.5px;color:var(--mute);text-align:center;margin-top:4px}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--hair-2);margin-right:5px;vertical-align:-1px}
+.legend i.b{background:var(--ink-2)}
+.hbar{display:grid;grid-template-columns:190px 1fr 70px;align-items:center;gap:10px;font-size:13px;margin:6px 0}
+.hbar b{display:block;height:8px;background:var(--hair);border-radius:4px;overflow:hidden}
+.hbar b i{display:block;height:100%;background:var(--ink-2);border-radius:4px;transition:width .6s var(--ease)}
+.hbar b i.hot{background:var(--amber-2)}
+.hbar span:last-child{text-align:right;color:var(--mute)}
+.big{font-size:40px;font-weight:600;line-height:1.1}
+.tl2{list-style:none;margin:0;padding:0}
+.tl2 li{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--hair);font-size:14px}
+.tl2 li:first-child{border-top:0}
+.tl2 li span:first-child{color:var(--mute);white-space:nowrap}
+.frames{display:flex;gap:12px;margin-top:12px}
+.frames .frame{width:300px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mask{color:var(--mute);font-size:13px;padding:2px 8px;border:1px dashed var(--hair-2);border-radius:5px}
+.card .body{padding:14px 16px}
+.note{padding:10px 14px;background:var(--soft);border-radius:var(--r-s);color:var(--mute);font-size:13px;margin-bottom:14px}
+.tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--soft);color:var(--mute)}
+.tag.ok{background:var(--green-bg);color:var(--green)}.tag.no{background:var(--red-bg);color:var(--red)}.tag.warn{background:var(--amber-bg);color:var(--amber)}

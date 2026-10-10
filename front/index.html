@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jarima maydonchasi</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="logo">JM</div>
+  </nav>
+
+  <header class="top">
+    <div><h1 id="orgName">Jarima maydonchasi</h1><div class="n">Maydonchada <span id="cnt">0</span></div></div>
+    <div class="search" id="searchBtn" role="button" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Raqam, VIN, protokol, egasi — yoki buyruq</span><kbd>Ctrl K</kbd></div>
+    <span class="sp"></span>
+    <div class="devs" id="devs"></div>
+    <span class="clock" id="clock"></span>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="offline" id="offline">Server bilan aloqa yo'q. Darvoza avtomatik ishlaydi, terminal faqat ko'rsatadi.</div>
+      <section id="lane"></section>
+      <section id="focus"></section>
+      <section id="view"></section>
+    </div>
+  </main>
+
+  <footer class="status">
+    <span class="last" id="last"></span>
+    <span class="sp"></span>
+    <span id="shiftInfo"></span>
+    <select id="demo" title="Sinov: kamera hodisalari"><option value="">Sinov</option></select>
+  </footer>
+</div>
+
+<div class="ov" id="ov"><div class="md" id="md"></div></div>
+<div class="pal" id="pal"><div class="box"><input id="palIn" placeholder="Raqam, VIN, protokol, egasi yoki buyruq…" autocomplete="off"><ul id="palList"></ul><div class="k">↑↓ tanlash, Enter ochish, Esc yopish</div></div></div>
+<div class="toasts" id="toasts"></div>
+<div class="lock" id="lock"><div class="box"><div class="logo">JM</div><h2 id="lockOrg">Jarima maydonchasi</h2><p class="mute">Terminal qulflangan. Darvoza avtomatik ishlamoqda.</p><div class="form" style="margin-top:16px"><label class="full"><span>Operator</span><select class="in" id="lockUser"></select></label><label class="full"><span>PIN</span><input class="in" id="lockPin" type="password" inputmode="numeric" maxlength="6"></label></div><div class="act"><button class="primary" id="lockOk">Kirish</button></div><div class="live" id="lockLive"></div></div></div>
+<div id="print"></div>
+
+<script src="js/qrcode.js"></script>
+<script src="js/store.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/views/lot.js"></script>
+<script src="js/views/car.js"></script>
+<script src="js/lane.js"></script>
+<script src="js/print.js"></script>
+<script src="js/rahbar.js"></script>
+<script src="js/views/pages.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

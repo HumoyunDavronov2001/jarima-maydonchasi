@@ -88,9 +88,45 @@ flowchart LR
 
 ## Sifat
 
-- `go test ./...` — hisob yadrosi va litsenziya bo'yicha sinovlar.
+- `go test ./...` — 25 ta sinov o'tadi: hisob yadrosi 17 ta, litsenziya 8 ta. Sinovlar yopiq kod bilan birga turadi.
 - **Front–server mosligi sinovi:** 15 ta holatda front'dagi `store.js` Node'da ishga tushiriladi va natijasi Go hisobi bilan solishtiriladi. Sinovning o'zi ham tekshirilgan: front ataylab buzilganda sinov yiqiladi.
 - To'liq zanjir uchidan uchigacha tekshirilgan: FTP kadr → ro'yxatga olish → to'lov → EPOS → ruxsatnoma → uch shart → shlagbaum → dalolatnoma.
+
+## Ochiq qismlar
+
+Bu repoda mahsulotning **yordamchi qismlari** ochiq: ekranlar, qurilma adapterlari, Android ilova va o'rnatish skriptlari.
+
+| Papka | Nima bor |
+|---|---|
+| `front/` | Ekranlar: operator ish o'rni (`index.html`), haydovchi darvoza ekrani (`darvoza.html`, 8 holat), hovli telefoni (`hovli.html`), nazorat paneli (`nazorat.html`). CSS va Public Sans shrifti (SIL OFL) |
+| `mobil/hovli/` | Android ilova manbasi (Kotlin, minSdk 24): ekranlar APK ichida, `WebViewAssetLoader`, kamera va `FileProvider`. `yig.sh` ekranlarni `front/` dan oladi |
+| `server/rele/` | Shlagbaum relesi: TCP buyruq, har 15 soniyada tiriklik tekshiruvi, relesiz sinov rejimi |
+| `server/ftp/` | Kamera uchun ichki FTP server (faqat `STOR`) va kadr nomidan kamera, raqam, vaqt, ishonchni ajratish |
+| `server/epos/` | EPOS fiskal chek adapteri: sinov rejimi va HTTP transport |
+| `server/oyna/`, `server/xizmat/` | Windows qobig'i: WebView2 oynasi, darvoza uchun kiosk, tray ikonka, Windows xizmati |
+| `windows/` | `ornat.bat` va `ochir.bat`: xizmat, firewall qoidalari, yorliqlar; ikonka va manifest |
+
+Mustaqil ochiladigan ekranlar:
+
+- `front/darvoza.html?s=open&p=01A123BC` — darvoza ekrani, holat `1`–`8` tugmalari bilan almashadi;
+- `front/hovli.html` — hovli telefoni, «Sinov rejimi» bilan serversiz ishlaydi.
+
+`rele`, `ftp`, `oyna`, `xizmat` paketlari yopiq qismlarga bog'liq emas (standart kutubxona, `golang.org/x/sys`, `go-webview2`) va Linux hamda Windows uchun yig'iladi.
+
+## Yopiq qismlar
+
+**Yadro va litsenziya moduli yopiq.** Quyidagilar repoga kiritilmagan:
+
+| Qism | Nima qiladi |
+|---|---|
+| `server/yadro` | Soatlik tarif, uch shart, raqam normallashtirish va ularning sinovlari |
+| `server/hub`, `server/veb` | Kamera oqimi, darvoza qarori, 40 amal, HTTP va WebSocket API |
+| `server/baza` | SQLite sxemasi va o'chirilmaydigan audit trigger'lari |
+| `server/litsenziya`, `cmd/kalit` | Ed25519 litsenziya tekshiruvi va kalit yasash vositasi |
+| `server/markaz`, `server/sinxron` | Viloyat markazi va HMAC imzoli bir yo'nalishli sinxron |
+| `front/js/store.js`, `front/js/mock.js` | Front'dagi hisob mantiqi va server emulyatsiyasi |
+
+Shu sababli `index.html` va `nazorat.html` yopiq `store.js` siz ishga tushmaydi, `epos` paketi esa yopiq `yadro` turlariga tayanadi.
 
 ## Huquqiy asos
 
@@ -101,7 +137,7 @@ flowchart LR
 
 <div align="center">
 
-**Manba kodi yopiq.** Namoyish yoki hamkorlik bo'yicha: Telegram [@Humoyun_Davronov](https://t.me/Humoyun_Davronov)
+**Yadro va litsenziya moduli yopiq.** Namoyish yoki hamkorlik bo'yicha: Telegram [@Humoyun_Davronov](https://t.me/Humoyun_Davronov)
 
 <sub>Muallif — Humoyun Davronov</sub>
 

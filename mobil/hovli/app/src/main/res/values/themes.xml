@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="jm_fon">#0F1523</color>
+    <style name="JMTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/jm_fon</item>
+        <item name="android:navigationBarColor">@color/jm_fon</item>
+        <item name="android:windowBackground">@color/jm_fon</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
